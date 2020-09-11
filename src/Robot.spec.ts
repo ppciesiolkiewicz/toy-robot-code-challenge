@@ -195,6 +195,11 @@ describe('Robot', () => {
                     expect(robot.x).toEqual(expectedPosition[0]);
                     expect(robot.y).toEqual(expectedPosition[1]);
                 });
+
+                it('Should not change robot facing', () => {
+                    // @ts-ignore
+                    expect(robot.facing).toEqual(new Direction(args[2]));
+                });
             });
         });
 
