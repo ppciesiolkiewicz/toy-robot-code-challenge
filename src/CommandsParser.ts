@@ -4,8 +4,8 @@ import Robot, { DirectionStringType } from './Robot';
 
 const COMMANDS_MAP: { [key: string]: any } = {
     'PLACE': (x: number, y: number, facing: DirectionStringType) => (r: Robot) => r.place(x, y, facing),
-    'LEFT': (r: Robot) => r.left(),
-    'RIGHT': (r: Robot) => r.right(),
+    'LEFT': (r: Robot) => r.rotateLeft(),
+    'RIGHT': (r: Robot) => r.rotateRight(),
     'MOVE': (r: Robot) => r.move(),
     'REPORT': (r: Robot) => r.report(),
 };

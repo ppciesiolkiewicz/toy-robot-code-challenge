@@ -47,7 +47,7 @@ describe('Direction', () => {
         });
     });
 
-    describe('left()', () => {
+    describe('rotateLeft()', () => {
         const tests: { initialDirection: DirectionStringType, expectedDirection: Direction }[] = [
             {
                 initialDirection: 'NORTH',
@@ -71,13 +71,13 @@ describe('Direction', () => {
             it(`Should rotate from ${initialDirection} to ${expectedDirection}`, () => {
                 direction = new Direction(initialDirection);
 
-                direction.left();
+                direction.rotateLeft();
                 expect(direction).toEqual(expectedDirection);
             });
         });
     });
 
-    describe('right()', () => {
+    describe('rotateRight()', () => {
         const tests: { initialDirection: DirectionStringType, expectedDirection: Direction }[] = [
             {
                 initialDirection: 'NORTH',
@@ -101,7 +101,7 @@ describe('Direction', () => {
             it(`Should rotate from ${initialDirection} to ${expectedDirection}`, () => {
                 direction = new Direction(initialDirection);
 
-                direction.right();
+                direction.rotateRight();
                 expect(direction).toEqual(expectedDirection);
             });
         });
@@ -113,7 +113,7 @@ describe('Direction', () => {
         ];
 
         tests.forEach(directionString => {
-            it(`Should return right string for ${directionString}`, () => {
+            it(`Should return rotateRight string for ${directionString}`, () => {
                 direction = new Direction(directionString);
 
                 expect(direction.toString()).toEqual(directionString);

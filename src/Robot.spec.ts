@@ -65,10 +65,10 @@ describe('Robot', () => {
     });
 
 
-    describe('left()', () => {
+    describe('rotateLeft()', () => {
         describe('When robot is not placed', () => {
             it('Should ignore the command', () => {
-                robot.left();
+                robot.rotateLeft();
                 expectRobotToBeInInitialState(robot);
             });
         });
@@ -99,7 +99,7 @@ describe('Robot', () => {
                 });
 
                 it(`Should rotate from ${args[2]} to ${expectedFacing}`, () => {
-                    robot.left();
+                    robot.rotateLeft();
                     expect(robot.facing).toEqual(expectedFacing);
                 });
 
@@ -111,10 +111,10 @@ describe('Robot', () => {
         });
     });
 
-    describe('right()', () => {
+    describe('rotateRight()', () => {
         describe('When robot is not placed', () => {
             it('Should ignore the command', () => {
-                robot.right();
+                robot.rotateRight();
                 expectRobotToBeInInitialState(robot);
             });
         });
@@ -145,7 +145,7 @@ describe('Robot', () => {
                 });
 
                 it(`Should rotate from ${args[2]} to ${expectedFacing}`, () => {
-                    robot.right();
+                    robot.rotateRight();
                     expect(robot.facing).toEqual(expectedFacing);
                 });
 

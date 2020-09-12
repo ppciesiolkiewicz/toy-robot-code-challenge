@@ -27,13 +27,13 @@ class Direction {
         this.vector = VECTOR_MAP[this.direction];
     }
 
-    left() {
+    rotateLeft() {
         this.direction = (this.direction - 1) === -1 ? DIRECTION.WEST : this.direction! - 1;
         this.vector = VECTOR_MAP[this.direction];
     }
 
 
-    right() {
+    rotateRight() {
         this.direction = (this.direction + 1) % (Object.keys(DIRECTION).length / 2);
         this.vector = VECTOR_MAP[this.direction];
     }

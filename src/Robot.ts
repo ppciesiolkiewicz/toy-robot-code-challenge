@@ -48,20 +48,20 @@ class Robot {
         }
     }
 
-    left(): void {
+    rotateLeft(): void {
         if (!this.isPlaced()) {
             return;
         }
 
-        this.facing!.left();
+        this.facing!.rotateLeft();
     }
 
-    right(): void {
+    rotateRight(): void {
         if (!this.isPlaced()) {
             return;
         }
 
-        this.facing!.right();
+        this.facing!.rotateRight();
     }
 
     report(): void {
