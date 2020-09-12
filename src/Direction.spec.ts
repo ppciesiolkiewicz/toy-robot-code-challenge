@@ -1,41 +1,54 @@
-import Direction from './Direction';
+import Direction, { DirectionStringType } from './Direction';
 
 
 describe('Direction', () => {
     let direction: any;
 
     describe('constructor()', () => {
-        const tests = [
-            {
-                initialDirection: 'NORTH',
-                expectedVector: [0, 1]
-            },
-            {
-                initialDirection: 'WEST',
-                expectedVector: [-1, 0]
-            },
-            {
-                initialDirection: 'SOUTH',
-                expectedVector: [0, -1]
-            },
-            {
-                initialDirection: 'EAST',
-                expectedVector: [1, 0]
-            }
-        ];
+        describe('When direction is valid', () => {
+            const tests: { initialDirection: DirectionStringType, expectedVector: [number, number] }[] = [
+                {
+                    initialDirection: 'NORTH',
+                    expectedVector: [0, 1]
+                },
+                {
+                    initialDirection: 'WEST',
+                    expectedVector: [-1, 0]
+                },
+                {
+                    initialDirection: 'SOUTH',
+                    expectedVector: [0, -1]
+                },
+                {
+                    initialDirection: 'EAST',
+                    expectedVector: [1, 0]
+                }
+            ];
 
-        tests.forEach(({ initialDirection, expectedVector }) => {
-            it(`Should have ${expectedVector} vector for ${initialDirection}`, () => {
+            tests.forEach(({ initialDirection, expectedVector }) => {
+                it(`Should have ${expectedVector} vector for ${initialDirection}`, () => {
+                    direction = new Direction(initialDirection);
+
+                    expect(direction.vector).toEqual(expectedVector);
+                });
+            });
+        });
+
+        describe('When direction is invalid', () => {
+            it('Should throw an error', () => {
                 // @ts-ignore
-                direction = new Direction(initialDirection);
+                expect(() => new Direction('INVALID')).toThrow(/Invalid direction provided/);
+            });
 
-                expect(direction.vector).toEqual(expectedVector);
+            it('Should throw an error', () => {
+                // @ts-ignore
+                expect(() => new Direction(undefined)).toThrow(/Invalid direction provided/);
             });
         });
     });
 
     describe('left()', () => {
-        const tests = [
+        const tests: { initialDirection: DirectionStringType, expectedDirection: Direction }[] = [
             {
                 initialDirection: 'NORTH',
                 expectedDirection: new Direction('WEST')
@@ -56,7 +69,6 @@ describe('Direction', () => {
 
         tests.forEach(({ initialDirection, expectedDirection }) => {
             it(`Should rotate from ${initialDirection} to ${expectedDirection}`, () => {
-                // @ts-ignore
                 direction = new Direction(initialDirection);
 
                 direction.left();
@@ -66,7 +78,7 @@ describe('Direction', () => {
     });
 
     describe('right()', () => {
-        const tests = [
+        const tests: { initialDirection: DirectionStringType, expectedDirection: Direction }[] = [
             {
                 initialDirection: 'NORTH',
                 expectedDirection: new Direction('EAST')
@@ -87,7 +99,6 @@ describe('Direction', () => {
 
         tests.forEach(({ initialDirection, expectedDirection }) => {
             it(`Should rotate from ${initialDirection} to ${expectedDirection}`, () => {
-                // @ts-ignore
                 direction = new Direction(initialDirection);
 
                 direction.right();
@@ -97,13 +108,12 @@ describe('Direction', () => {
     });
 
     describe('toString()', () => {
-        const tests = [
+        const tests: DirectionStringType[] = [
             'NORTH', 'EAST', 'WEST', 'SOUTH'
         ];
 
         tests.forEach(directionString => {
             it(`Should return right string for ${directionString}`, () => {
-                // @ts-ignore
                 direction = new Direction(directionString);
 
                 expect(direction.toString()).toEqual(directionString);

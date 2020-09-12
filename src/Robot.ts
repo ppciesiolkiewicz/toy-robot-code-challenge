@@ -1,6 +1,5 @@
 import Direction, { DirectionStringType } from './Direction';
 
-
 class Robot {
     private tableSize: number;
     private x?: number;
@@ -65,4 +64,5 @@ class Robot {
     }
 }
 
+export type { DirectionStringType };
 export default Robot;

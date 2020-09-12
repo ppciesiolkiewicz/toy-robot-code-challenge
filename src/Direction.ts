@@ -19,6 +19,10 @@ class Direction {
     vector: [number, number];
 
     constructor(direction: DirectionStringType) {
+        if (!Object.keys(DIRECTION).includes(direction)) {
+            throw new Error('Invalid direction provided');
+        }
+
         this.direction = DIRECTION[direction];
         this.vector = VECTOR_MAP[this.direction];
     }
