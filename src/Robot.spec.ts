@@ -46,6 +46,22 @@ describe('Robot', () => {
                 expect(robot.facing).toEqual(new Direction('EAST'));
             });
         });
+
+        describe('When place arguments are not valid', () => {
+            const tests = [
+                ['4', '5', 'EAST'],
+                [null, 2, 'EAST'],
+                [2, null, 'EAST'],
+                [2, 2, 'INVALID'],
+            ];
+
+            tests.forEach(args => {
+                it('Should not change the robot coordinates', () => {
+                    robot.place(...args)
+                    expectRobotToBeInInitialState(robot);
+                });
+            });
+        });
     });
 
 

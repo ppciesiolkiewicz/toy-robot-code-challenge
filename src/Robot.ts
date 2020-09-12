@@ -17,11 +17,20 @@ class Robot {
         return this.x !== undefined && this.y !== undefined && this.facing !== undefined;
     }
 
+    private areCoordinatesOnTheTable(x: number, y: number) {
+       return Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0 && x < this.tableSize && y < this.tableSize; 
+    }
+
     place(x: number, y: number, facing: DirectionStringType): void {
-        if (x >= 0 && y >= 0 && x < this.tableSize && y < this.tableSize) {
+        if (this.areCoordinatesOnTheTable(x, y)) {
+            try {
+                this.facing = new Direction(facing);
+            } catch {
+                return;
+            }
+
             this.x = x;
             this.y = y;
-            this.facing = new Direction(facing);
         }
     }
 
@@ -33,7 +42,7 @@ class Robot {
         const newX = this.x! + this.facing!.vector[0];
         const newY = this.y! + this.facing!.vector[1];
 
-        if (newX >= 0 && newY >= 0 && newX < this.tableSize && newY < this.tableSize) {
+        if (this.areCoordinatesOnTheTable(newX, newY)) {
             this.x! = newX;
             this.y! = newY;
         }
