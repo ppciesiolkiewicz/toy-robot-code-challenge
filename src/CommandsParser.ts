@@ -3,11 +3,19 @@ import * as fs from 'fs';
 import Robot, { DirectionStringType } from './Robot';
 
 const COMMANDS_MAP: { [key: string]: any } = {
-    'PLACE': (x: number, y: number, facing: DirectionStringType) => (r: Robot) => r.place(x, y, facing),
-    'LEFT': (r: Robot) => r.rotateLeft(),
-    'RIGHT': (r: Robot) => r.rotateRight(),
-    'MOVE': (r: Robot) => r.move(),
-    'REPORT': (r: Robot) => r.report(),
+    'PLACE': (commandLine: string) => {
+        const splitted = commandLine.split(' ');
+        const args: string[] = splitted[1].split(',');
+        const x: number = Number(args[0]);
+        const y: number = Number(args[1]);
+        const facing: DirectionStringType = args[2] as DirectionStringType;
+
+        return (r: Robot) => r.place(x, y, facing);
+    },
+    'LEFT': (commandLine: string) => (r: Robot) => r.rotateLeft(),
+    'RIGHT': (commandLine: string) => (r: Robot) => r.rotateRight(),
+    'MOVE': (commandLine: string) => (r: Robot) => r.move(),
+    'REPORT': (commandLine: string) => (r: Robot) => r.report(),
 };
 
 class CommandsParser {
@@ -28,15 +36,8 @@ class CommandsParser {
             const splitted = line.split(' ');
             const command = splitted[0];
 
-            if (command === 'PLACE') {
-                const args: (string|number)[] = splitted[1].split(',');
-                args[0] = Number(args[0]);
-                args[1] = Number(args[1]);
-
-                return COMMANDS_MAP[command](...args);
-            }
-
-            return COMMANDS_MAP[command];
+            const commandCreator = COMMANDS_MAP[command];
+            return commandCreator && commandCreator(line);
         }).filter(Boolean);
     }
 
